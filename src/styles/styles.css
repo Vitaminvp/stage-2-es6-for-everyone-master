@@ -1,3 +1,5 @@
+
+
 html,
 body {
     height: 100%;
@@ -17,6 +19,7 @@ body {
 
 .fighters {
     display: flex;
+    min-width: 80%;
     justify-content: space-between;
     align-items: center;
     flex: 1;
@@ -28,10 +31,11 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    transition: all 0.2s ease-in-out;
 }
 
 .fighter:hover {
-    box-shadow: 0 0 50px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.06);
     cursor: pointer;
 }
 
@@ -57,4 +61,144 @@ body {
     font-size: 18px;
     background: rgba(255, 255, 255, 0.7);
     visibility: hidden;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 320px;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input {
+    width: 300px;
+    font-size: 13px;
+    padding: 6px 0 4px 10px;
+    border: 1px solid #cecece;
+    background: #f6f6f6;
+    border-radius: 0;
+}
+
+button {
+    margin-top: 20px;
+    width: 90px;
+    height: 28px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #666;
+    border-radius: 5px;
+    box-shadow: 0 0 2px #ccc;
+}
+
+button:active {
+    box-shadow: inset 0 2px 2px #ccc;
+}
+
+button:hover {
+    box-shadow: inset 0 0px 2px #9c9c9c;
+}
+
+progress {
+    display: block;
+    margin: 5px auto;
+    padding: 2px;
+    border: 0 none;
+    background: #444;
+    border-radius: 14px;
+}
+
+progress.progress-health::-moz-progress-bar {
+    border-radius: 12px;
+    background: green;
+}
+
+progress.progress-attack::-moz-progress-bar {
+    border-radius: 12px;
+    background: red;
+}
+
+progress.progress-defense::-moz-progress-bar {
+    border-radius: 12px;
+    background: blue;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    progress {
+        height: 10px;
+    }
+}
+
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+progress.progress-health::-webkit-progress-value {
+    border-radius: 12px;
+    background: green;
+}
+
+progress.progress-attack::-webkit-progress-value {
+    border-radius: 12px;
+    background: red;
+}
+
+progress.progress-defense::-webkit-progress-value {
+    border-radius: 12px;
+    background: blue;
+}
+
+.hidden {
+    display: none;
+}
+
+.rotate {
+    transform: rotateY(180deg);
+}
+.defence {
+    background-color: red;
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    background-position: center;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    filter: blur(3px);
+}
+.attackLeft{
+    position: relative;
+    transform: scale(1.2)  translateX(-60vw);
+}
+.attackRight{
+    position: relative;
+    transform: scale(1.2)  translateX(60vw);
 }

@@ -14,10 +14,12 @@ class App {
       App.loadingElement.style.visibility = 'visible';
       
       const fighters = await fighterService.getFighters();
+      console.log(fighters);
       const fightersView = new FightersView(fighters);
       const fightersElement = fightersView.element;
 
       App.rootElement.appendChild(fightersElement);
+
     } catch (error) {
       console.warn(error);
       App.rootElement.innerText = 'Failed to load data';
