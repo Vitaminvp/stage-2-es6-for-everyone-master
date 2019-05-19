@@ -1,5 +1,4 @@
 /node_modules
-#/dist
-npm-debug.log
+/dist
 /.idea
-.idea
+npm-debug.log

@@ -202,3 +202,12 @@ progress.progress-defense::-webkit-progress-value {
     position: relative;
     transform: scale(1.2)  translateX(60vw);
 }
+input:focus:valid  {
+    border-color: #0f0;
+    background: transparent;
+}
+input:focus:invalid {
+    border-color: #f00;
+    background: transparent;
+}
+

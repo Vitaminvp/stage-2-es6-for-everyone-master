@@ -3,7 +3,7 @@ import FighterView from "./fighterView";
 import { fighterService } from "./services/fightersService";
 import Modal from "./modal";
 import Fighter from "./fighter";
-import { fight } from "./helpers/apiHelper";
+import { CONSTANTS, fight } from "./helpers/apiHelper";
 
 class FightersView extends View {
   constructor(fighters) {
@@ -34,34 +34,37 @@ class FightersView extends View {
     const firstFighterId = fighter._id;
     if (!this.fightersDetailsMap.has(firstFighterId)) {
       const fighterDetails = await fighterService.getFighterDetails(
-          firstFighterId
+        firstFighterId
       );
       this.fightersDetailsMap.set(firstFighterId, fighterDetails);
     }
-    if (this.fightersMap.size >= 2) {
-
+    if (this.fightersMap.size >= CONSTANTS.fightersAmount) {
       const secondFighterId = Array.from(this.fightersMap.keys()).filter(
         id => +id !== +firstFighterId
       )[0];
-      const firstFighterElement = this.element.querySelector(`[id="${firstFighterId}"]`);
-      const secondFighterElement = this.element.querySelector(`[id="${secondFighterId}"]`);
+      const firstFighterElement = this.element.querySelector(
+        `[id="${firstFighterId}"]`
+      );
+      const secondFighterElement = this.element.querySelector(
+        `[id="${secondFighterId}"]`
+      );
 
       secondFighterElement.classList.add("defence");
       const coords = firstFighterElement.getBoundingClientRect();
 
-      if(document.documentElement.clientWidth < (coords.left + coords.right)) {
+      if (document.documentElement.clientWidth < coords.left + coords.right) {
         firstFighterElement.classList.add("attackLeft");
       } else {
         firstFighterElement.classList.add("attackRight");
       }
 
-      setTimeout(()=> {
-        firstFighterElement.classList.remove("attackLeft", 'attackRight');
-      }, 200);
+      setTimeout(() => {
+        firstFighterElement.classList.remove("attackLeft", "attackRight");
+      }, CONSTANTS.attackDelay);
 
-      setTimeout(()=> {
+      setTimeout(() => {
         secondFighterElement.classList.remove("defence");
-      }, 100);
+      }, CONSTANTS.defenceDelay);
 
       if (this.fightersMap.has(firstFighterId)) {
         const demage = fight(
@@ -85,20 +88,24 @@ class FightersView extends View {
     this.fighter = new Fighter(name, health, attack, defense, this.progressBar);
     this.fightersMap.set(_id, this.fighter);
 
-    if(this.fightersMap.size >= 2){
+    if (this.fightersMap.size >= CONSTANTS.fightersAmount) {
       const fighterElements = this.element.querySelectorAll(".fighter");
-      if (fighterElements.length > 2) {
+      if (fighterElements.length > CONSTANTS.fightersAmount) {
         const fightersArray = Array.from(this.fightersMap.keys());
-        const [ firstFighterId, secondFighterId ] = fightersArray;
+        const [firstFighterId, secondFighterId] = fightersArray;
         fighterElements.forEach(item => {
           if (+item.id !== +firstFighterId && +item.id !== +secondFighterId) {
             item.classList.add("hidden");
           }
         });
         if (!this.element.querySelector(".rotate")) {
-          (firstFighterId > secondFighterId)
-              ? this.element.querySelector(`[id="${firstFighterId}"] .fighter-image`).classList.add("rotate")
-              : this.element.querySelector(`[id="${secondFighterId}"] .fighter-image`).classList.add("rotate");
+          firstFighterId > secondFighterId
+            ? this.element
+                .querySelector(`[id="${firstFighterId}"] .fighter-image`)
+                .classList.add("rotate")
+            : this.element
+                .querySelector(`[id="${secondFighterId}"] .fighter-image`)
+                .classList.add("rotate");
         }
       }
     }

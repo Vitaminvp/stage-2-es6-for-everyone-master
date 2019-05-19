@@ -1,7 +1,6 @@
 import { callApi } from "../helpers/apiHelper";
 
 class FighterService {
-  static modal = document.getElementById("myModal");
 
   async getFighters() {
     try {

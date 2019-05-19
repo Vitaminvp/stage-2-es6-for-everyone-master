@@ -1,6 +1,12 @@
 const API_URL =
   "https://api.github.com/repos/binary-studio-academy/stage-2-es6-for-everyone/contents/resources/api/";
 
+const CONSTANTS = {
+  attackDelay: 150,
+  defenceDelay: 100,
+  fightersAmount: 2
+};
+
 function callApi(endpoind, method = "GET") {
   const url = API_URL + endpoind;
   const options = {
@@ -28,7 +34,7 @@ function fight(first, second) {
       ? secondFighter.getHealth() - damage
       : 0;
   if (healthLeft === 0) {
-    alert(`${secondFighter.name} lost!`);
+    alert(`${firstFighter.name} won!`);
     window.location.reload();
   } else {
     secondFighter.setHealth(healthLeft);
@@ -37,6 +43,6 @@ function fight(first, second) {
   }
 }
 
-const random = () => Math.random() * 2;
+const random = () => Math.random() * 2 + 1;
 
-export { callApi, random, fight };
+export { callApi, random, fight, CONSTANTS };
