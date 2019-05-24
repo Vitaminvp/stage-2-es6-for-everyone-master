@@ -4,9 +4,11 @@ class FighterService {
 
   async getFighters() {
     try {
-      const endpoint = "fighters.json";
+      // const endpoint = "fighters.json";
+      const endpoint = "fighters";
       const apiResult = await callApi(endpoint, "GET");
-      return JSON.parse(atob(apiResult.content));
+      //return JSON.parse(atob(apiResult.content));
+      return JSON.parse(apiResult);
     } catch (error) {
       throw error;
     }

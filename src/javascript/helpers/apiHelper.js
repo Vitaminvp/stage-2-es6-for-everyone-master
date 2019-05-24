@@ -1,5 +1,7 @@
+// const API_URL =
+//   "https://api.github.com/repos/binary-studio-academy/stage-2-es6-for-everyone/contents/resources/api/";
 const API_URL =
-  "https://api.github.com/repos/binary-studio-academy/stage-2-es6-for-everyone/contents/resources/api/";
+   "http://localhost:3000/";
 
 const CONSTANTS = {
   attackDelay: 150,
@@ -10,7 +12,8 @@ const CONSTANTS = {
 function callApi(endpoind, method = "GET") {
   const url = API_URL + endpoind;
   const options = {
-    method
+    method: method,
+    // mode: 'no-cors'
   };
 
   return fetch(url, options)
